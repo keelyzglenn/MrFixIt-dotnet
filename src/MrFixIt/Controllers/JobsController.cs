@@ -18,6 +18,7 @@ namespace MrFixIt.Controllers
         public IActionResult Index()
         {
             return View(db.Jobs.Include(i => i.Worker).ToList());
+            //this connects the jobs and workers databases?
         }
 
         public IActionResult Create()
