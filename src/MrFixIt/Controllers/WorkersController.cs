@@ -17,6 +17,7 @@ namespace MrFixIt.Controllers
         public IActionResult Index()
         {
             var thisWorker = db.Workers.Include(i =>i.Jobs).FirstOrDefault(i => i.UserName == User.Identity.Name);
+            //connects workers to with jobs and also uses authentification
             if (thisWorker != null)
             {
                 return View(thisWorker);

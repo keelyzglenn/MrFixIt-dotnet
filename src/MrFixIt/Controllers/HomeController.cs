@@ -17,6 +17,7 @@ namespace MrFixIt.Controllers
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
+                //user if statement in backend
             {
                 var thisWorker = db.Workers.FirstOrDefault(item => item.UserName == User.Identity.Name);
                 return View(thisWorker);
