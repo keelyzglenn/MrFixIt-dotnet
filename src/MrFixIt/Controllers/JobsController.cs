@@ -36,17 +36,20 @@ namespace MrFixIt.Controllers
 
         public IActionResult Claim(int id)
         {
-            var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
-            return View(thisItem);
+            var thisJob = db.Jobs.FirstOrDefault(jobs => jobs.JobId == id);
+            return View(thisJob);
+            //will need to return a partial view for this with ajax
         }
 
         [HttpPost]
         public IActionResult Claim(Job job)
         {
+            //claim is an update method. 
             job.Worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
             db.Entry(job).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
+
         }
     }
 }

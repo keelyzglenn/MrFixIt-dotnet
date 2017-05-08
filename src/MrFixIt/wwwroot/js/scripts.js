@@ -5,14 +5,19 @@
 //edit form for claiming job -get
 
 $(document).ready(function () {
-    $('.edit-form').click(function (event) {
+    //Claim button get function
+    $('.edit-claim').click(function () {
+        var path = '#return-claim-' + this.value;
         $.ajax({
             type: 'GET',
             datatype: 'html',
-            url: '/Job/Claim' = this.value,
+            url: 'Jobs/Claim/' + this.value,
             success: function (result) {
-                $('.return-claim').html(result);
+                $(path).html(result);
             }
         });
     });
+
+
+
 });
