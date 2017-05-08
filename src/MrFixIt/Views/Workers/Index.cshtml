@@ -1,14 +1,14 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Mr FixIt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 @if (User.Identity.IsAuthenticated)
 {
+    <img
 
-    <div class="text-center">
+    <div>
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)

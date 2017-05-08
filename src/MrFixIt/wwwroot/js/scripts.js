@@ -34,11 +34,24 @@ $(document).ready(function () {
     $(document).ready(function () {
         //get click function- update is done in controller
         $('.activate').click(function () {
-            var path = '#activate-' + this.id;
-            console.log(this.id);
+            var path = '#activate-' + this.value;
             $.ajax({
                 type: 'GET',
-                url: 'Jobs/Activate/' + this.id,
+                url: 'Jobs/Activate/' + this.value,
+                success: function (result) {
+                    $(path).html(result);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        //get click function- update is done in controller
+        $('.complete').click(function () {
+            var path = '#complete-' + this.value;
+            $.ajax({
+                type: 'GET',
+                url: 'Jobs/Complete/' + this.value,
                 success: function (result) {
                     $(path).html(result);
                 }

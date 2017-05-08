@@ -50,11 +50,21 @@ namespace MrFixIt.Controllers
             return RedirectToAction("Index");
         }
 
-        //combines get and post methods for activate. updates pending status here
+
+
         public IActionResult Activate(int id)
         {
-            var thisJob = db.Jobs.FirstOrDefault(jobs => jobs.JobId == id);
+            var thisJob = db.Jobs.FirstOrDefault(i => i.JobId == id);
             thisJob.Pending = true;
+            db.Entry(thisJob).State = EntityState.Modified;
+            db.SaveChanges();
+            return View(thisJob);
+        }
+
+        public IActionResult Complete(int id)
+        {
+            var thisJob = db.Jobs.FirstOrDefault(i => i.JobId == id);
+            thisJob.Completed = true;
             db.Entry(thisJob).State = EntityState.Modified;
             db.SaveChanges();
             return View(thisJob);

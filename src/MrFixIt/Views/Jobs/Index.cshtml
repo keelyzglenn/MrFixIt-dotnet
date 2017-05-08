@@ -1,57 +1,83 @@
-﻿@*
-    @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })
-*@
-
+﻿
 @{
     ViewData["Title"] = "Mr FixIt";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
+<div>
     <h3>Our Current Jobs</h3>
     @Html.ActionLink("Add a new job", "Create")
 </div>
 @foreach (var Job in Model)
 {
-    
-        <p>@Job.Title</p>
-        <ul>
-            <li>@Job.Description</li>
-        </ul>
-           @*unclaimed jobs will be shown*@
-        @if (Job.Worker == null)
-        {
-            <div id="claim-@Job.JobId">
-                <p>This job is unclaimed. <button class="edit-claim" value="@Job.JobId">Claim This Job</button></p>
+    <div class="row">
+        <h2 class="text-center">@Job.Title</h2>
+        <h3 class="text-center">@Job.Description</h3>
+    </div>
+    <br />
+    <div class="row text-center">
+        <div class="col-md-4">
+            <h4>Claim Status</h4>
+            @if (Job.Worker == null)
+            {
+                <p>This job is unclaimed. </p>
+            <p><button class="edit-claim clickable" value="@Job.JobId">Claim This Job</button></p>
                 <div id="return-claim-@Job.JobId">
 
                 </div>
                 <p class="result-test"></p>
-            </div>
+                <div id="claim-@Job.JobId">
+                </div>
 
- 
-        }
 
-        else
-        {
-            <p>This Job is claimed by @Job.Worker.FirstName @Job.Worker.LastName</p>
+            }
 
-    }
+            else
+            {
+                <p>This Job is claimed by @Job.Worker.FirstName @Job.Worker.LastName</p>
 
-    
-    @if (Job.Pending == false)
-    {
-        <div id="activate-@Job.JobId">
-            <p>This job is pending <span class="activate btn" id="@Job.JobId">Activate this job</span></p>
+            }
         </div>
-    }
+
+
+        <div class="col-md-4">
+            <h4>Active Status</h4>
+            @if (Job.Pending == false)
+            {
+                <div id="activate-@Job.JobId">
+                <p>This job is pending </p>
+            <button class="activate clickable" value="@Job.JobId">Activate this job</button>
+                </div>
+            }
+
+            else
+            {
+                <p>This job is active</p>
+
+            }
+        </div>
+
+        <div class="col-md-4">
+            <h4>Completion Status</h4>
+            @if (Job.Completed == false)
+            {
+                <div id="complete-@Job.JobId">
+                <p>This job not yet compeleted </p>
+            <button class="complete clickable" value="@Job.JobId">Complete this job</button>
+                </div>
+            }
+
+            else
+            {
+                <p>This job is completed</p>
+
+            }
+
+        </div>
+
+    </div>
+       
    
-    else
-    {
-        <p>This job is active</p>
-
-    }
-
 
     <hr />
 }
