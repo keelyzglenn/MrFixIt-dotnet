@@ -26,6 +26,7 @@
                 <div id="return-claim-@Job.JobId">
 
                 </div>
+                <p class="result-test"></p>
             </div>
 
  
@@ -37,7 +38,19 @@
 
     }
 
+    
+    @if (Job.Pending == false)
+    {
+        <div id="activate-@Job.JobId">
+            <p>This job is pending <span class="activate btn" id="@Job.JobId">Activate this job</span></p>
+        </div>
+    }
+   
+    else
+    {
+        <p>This job is active</p>
 
+    }
 
 
     <hr />

@@ -44,12 +44,20 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public IActionResult Claim(Job job)
         {
-            //claim is an update method. 
             job.Worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
             db.Entry(job).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
 
+        //combines get and post methods for activate. updates pending status here
+        public IActionResult Activate(int id)
+        {
+            var thisJob = db.Jobs.FirstOrDefault(jobs => jobs.JobId == id);
+            thisJob.Pending = true;
+            db.Entry(thisJob).State = EntityState.Modified;
+            db.SaveChanges();
+            return View(thisJob);
         }
     }
 }

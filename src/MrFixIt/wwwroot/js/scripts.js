@@ -18,6 +18,31 @@ $(document).ready(function () {
         });
     });
 
+    $(".make-claim").click(function () {
+        //marks claim for worker
+        $.ajax({
+            type: 'POST',
+            dataType: 'html',
+            url: 'Jobs/Claim/' + this.JobId,
+            success: function (result) {
+                var message = 'This Job has been claimed';
+                $('.result-test').html(message);
+            }
+        });
+    });
 
-
+    $(document).ready(function () {
+        //get click function- update is done in controller
+        $('.activate').click(function () {
+            var path = '#activate-' + this.id;
+            console.log(this.id);
+            $.ajax({
+                type: 'GET',
+                url: 'Jobs/Activate/' + this.id,
+                success: function (result) {
+                    $(path).html(result);
+                }
+            });
+        });
+    });
 });
